@@ -75,6 +75,11 @@ function arenaSweep() {
 		y++;
 		player.score += 10;
 		score.innerText = player.score;
+		if (player.score > 30) {
+			dropInterval = 100;
+		} else if (player.score > 10) {
+			dropInterval = 200;
+		}
 	}
 }
 
@@ -137,8 +142,8 @@ function playerDrop() {
 	if (collide(arena, player)) {
 		player.pos.y--;
 		merge(arena, player);
-		playerReset();
 		arenaSweep();
+		playerReset();
 	}
 
 	dropCounter = 0;
@@ -149,12 +154,12 @@ function playerReset() {
 	player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
 	player.pos.y = 0;
 	player.pos.x = (arena[0].length / 2 | 0) - (player.pos.x / 2 | 0);
-
 	if (collide(arena, player)) {
-		alert('Loser!!!!');
 		arena.forEach(row => {
 			row.fill(0);
-		})
+		});
+		alert('Loser!!!!');
+		playerReset();
 	}
 }
 
@@ -204,16 +209,12 @@ function playerMove(dir) {
 
 
 function update(time = 0) {
-	if (player.score > 50) {
-		dropInterval = 300;
-	} else if (player.score > 100) {
-		dropInterval = 100;
-	}
-
 	const deltaTime = time - lastTime;
 	lastTime = time;
 	
 	dropCounter += deltaTime;
+
+
 	if (dropCounter > dropInterval) {
 		playerDrop();
 	}
@@ -247,5 +248,5 @@ document.addEventListener('keydown', event => {
 
 });
 
-playerReset()
+playerReset();
 update();
