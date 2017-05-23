@@ -157,6 +157,10 @@ function playerReset() {
 	if (collide(arena, player)) {
 		arena.forEach(row => {
 			row.fill(0);
+			player.score = 0;
+			dropInterval = 1000;
+			//score.innerText = player.score;
+
 		});
 		alert('Loser!!!!');
 		playerReset();
