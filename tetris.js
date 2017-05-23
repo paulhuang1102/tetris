@@ -159,7 +159,7 @@ function playerReset() {
 			row.fill(0);
 			player.score = 0;
 			dropInterval = 1000;
-			//score.innerText = player.score;
+			score.innerText = player.score;
 
 		});
 		alert('Loser!!!!');
