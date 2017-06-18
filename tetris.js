@@ -1,8 +1,14 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
+const david = document.querySelector('.lose-cover');
 context.scale(20, 20);
 const score = document.getElementById('score');
 score.innerText = 0;
+
+david.addEventListener('click', function() {
+	david.style.display = 'none';
+	draw();
+});
 
 function createPiece(type) {
 	if (type === 'T') {
@@ -57,7 +63,7 @@ const colors = [
 	'blue',
 	'green',
 	'violet',
-	'purple',
+	'gray',
 	'orange',
 	'skyblue'
 ];
@@ -162,7 +168,7 @@ function playerReset() {
 			score.innerText = player.score;
 
 		});
-		alert('Loser!!!!');
+		david.style.display = 'block';
 		playerReset();
 	}
 }
@@ -246,9 +252,6 @@ document.addEventListener('keydown', event => {
 	} else if (event.keyCode === 38) {
 		playerRotate(1);
 	}
-	// } else if (event.keyCode === 87) {
-	// 	playerRotate(-1);
-	// }
 
 });
 
